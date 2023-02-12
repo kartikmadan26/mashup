@@ -90,7 +90,7 @@ def main():
             base.export(file_name, format="mp3")
             for i in range(len(file_list)):
                 os.remove(file_list[i])
-            os.remove("audios")
+            os.rmdir("audios")
             mp3_to_zip(file_name,"zipfile.zip")
             os.remove(file_name)
             send_email(SENDER_ADDRESS, SENDER_PASSWORD, email_id, SMTP_SERVER_ADDRESS, 587, 'Here is your zip file', 'Mashup', 'zipfile.zip')
