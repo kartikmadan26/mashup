@@ -32,9 +32,9 @@ def merge(sounds, mashup):
 def download_audio(link, name):
     yt = YouTube(link)
     video = yt.streams.filter(only_audio=True).first()
-    out_file = video.download(output_path=".")
+    out_file = video.download(output_path="audios/")
     # base, ext = os.path.splitext(out_file)
-    new_file = name + '.mp3'
+    new_file = "audios/"+name + '.mp3'
     os.rename(out_file, new_file)
 
 def mp3_to_zip(mp3_file_path, zip_file_path):
@@ -63,6 +63,7 @@ def main():
                 url = "https://www.youtube.com"+url
                 urls.append(url)
             threads = []
+            os.mkdir("audios")
             for i in range(len(urls)):
                 name = "audio"+str(i)
                 t = threading.Thread(target=download_audio, args=(urls[i], name))
@@ -75,7 +76,7 @@ def main():
             sounds = []
             mashup = AudioSegment.empty()
             for i in range(number_of_videos):
-                path = "audio"+str(i)+".mp3"
+                path = "audios/audio"+str(i)+".mp3"
                 file_list.append(path)
                 t = threading.Thread(target=slicing, args=(
                     path, audio_duration, sounds))
@@ -89,9 +90,11 @@ def main():
             base.export(file_name, format="mp3")
             for i in range(len(file_list)):
                 os.remove(file_list[i])
+            os.remove("audios")
             mp3_to_zip(file_name,"zipfile.zip")
             os.remove(file_name)
             send_email(SENDER_ADDRESS, SENDER_PASSWORD, email_id, SMTP_SERVER_ADDRESS, 587, 'Here is your zip file', 'Mashup', 'zipfile.zip')
+            os.remove("zipfile.zip")
     st.write("By :- Kartik Madan (102003565) ")
 if __name__=='__main__':
     main()
