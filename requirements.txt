@@ -3,4 +3,4 @@ pandas==1.5.1
 pydub==0.25.1
 pytube==12.1.2
 streamlit==1.18.1
-youtube_search=2.1.2
+youtube_search==2.1.2
