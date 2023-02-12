@@ -63,6 +63,8 @@ def main():
                 url = "https://www.youtube.com"+url
                 urls.append(url)
             threads = []
+            if os.path.exists("audios"):
+                os.rmdir("audios")
             os.mkdir("audios")
             for i in range(len(urls)):
                 name = "audio"+str(i)
