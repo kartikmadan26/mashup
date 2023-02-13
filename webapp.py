@@ -9,6 +9,7 @@ import threading
 import time
 from SendEmail import send_email
 import zipfile
+import shutil
 
 SENDER_ADDRESS=st.secrets["email"]
 # encrypted password
@@ -64,7 +65,7 @@ def main():
                 urls.append(url)
             threads = []
             if os.path.exists("audios"):
-                os.rmdir("audios")
+                shutil.rmtree("audios")
             os.mkdir("audios")
             for i in range(len(urls)):
                 name = "audio"+str(i)
