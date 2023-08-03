@@ -1,6 +1,8 @@
 numpy==1.22.0
 pandas==1.5.1
+youtube-search-python==1.6.6
 pydub==0.25.1
 pytube==12.1.2
 streamlit==1.18.1
 youtube_search==2.1.2
+moviepy==1.0.3
